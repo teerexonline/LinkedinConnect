@@ -73,9 +73,9 @@ export default function Features() {
     <section id="features" className="lc-features-section" style={{ position: 'relative' }}>
       {/* Divider line */}
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-        <div style={{ height: '1px', background: 'linear-gradient(90deg, transparent, rgba(74,127,255,0.2), transparent)', marginBottom: '80px' }} />
+        <div style={{ height: '1px', background: 'linear-gradient(90deg, transparent, rgba(74,127,255,0.2), transparent)', marginBottom: '40px' }} />
 
-        <div style={{ textAlign: 'center', marginBottom: '72px' }}>
+        <div style={{ textAlign: 'center', marginBottom: '40px' }}>
           <div style={{ display: 'inline-block', padding: '4px 14px', borderRadius: '100px', border: '1px solid rgba(74,127,255,0.3)', background: 'rgba(74,127,255,0.06)', marginBottom: '16px' }}>
             <span style={{ fontSize: '11px', fontFamily: 'var(--font-jakarta)', fontWeight: 700, color: '#4a7fff', letterSpacing: '0.1em', textTransform: 'uppercase' }}>Features</span>
           </div>
