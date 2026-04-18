@@ -26,12 +26,12 @@ const floatingCards = [
 
 export default function Hero() {
   return (
-    <section style={{ minHeight: '92vh', display: 'flex', alignItems: 'center', padding: '80px 32px', position: 'relative', overflow: 'hidden' }}>
+    <section className="lc-hero-section" style={{ display: 'flex', alignItems: 'flex-start', position: 'relative', overflow: 'hidden' }}>
       {/* Ambient glow */}
       <div style={{ position: 'absolute', top: '15%', left: '5%', width: '700px', height: '700px', background: 'radial-gradient(circle, rgba(74,127,255,0.07) 0%, transparent 65%)', pointerEvents: 'none' }} />
       <div style={{ position: 'absolute', bottom: '10%', right: '10%', width: '400px', height: '400px', background: 'radial-gradient(circle, rgba(167,139,250,0.05) 0%, transparent 65%)', pointerEvents: 'none' }} />
 
-      <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', alignItems: 'center', gap: '64px', width: '100%' }}>
+      <div className="lc-hero-inner">
         {/* Left: Copy */}
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '5px 14px', borderRadius: '100px', border: '1px solid rgba(74,127,255,0.3)', background: 'rgba(74,127,255,0.07)', marginBottom: '28px' }}>
@@ -67,7 +67,7 @@ export default function Hero() {
             </a>
           </div>
 
-          <div style={{ display: 'flex', gap: '40px' }}>
+          <div className="lc-hero-stats">
             {[['12K+', 'Startups on Platform'], ['500K+', 'Founder Connections'], ['3×', 'Avg Page Growth']].map(([val, label]) => (
               <div key={label}>
                 <div style={{ fontFamily: 'var(--font-syne)', fontSize: '28px', fontWeight: 800, color: '#e8edf5', letterSpacing: '-0.025em', lineHeight: 1 }}>{val}</div>
@@ -78,7 +78,7 @@ export default function Hero() {
         </div>
 
         {/* Right: Network viz */}
-        <div style={{ flex: '0 0 auto', display: 'flex', justifyContent: 'center' }}>
+        <div className="lc-hero-viz">
           <div style={{ position: 'relative', width: '480px', height: '480px' }}>
             {/* Outer ring */}
             <div style={{ position: 'absolute', inset: 0, borderRadius: '50%', border: '1px solid rgba(74,127,255,0.08)', background: 'radial-gradient(circle, rgba(74,127,255,0.04) 0%, transparent 70%)' }} />

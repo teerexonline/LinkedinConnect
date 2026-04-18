@@ -37,11 +37,11 @@ const socials = [
 
 export default function Footer() {
   return (
-    <footer style={{ borderTop: '1px solid rgba(74,127,255,0.07)', padding: '72px 32px 36px', background: '#050b14' }}>
-      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1.6fr 1fr 1fr 1fr 1fr', gap: '40px', marginBottom: '56px' }}>
+    <footer style={{ borderTop: '1px solid rgba(74,127,255,0.07)', background: '#050b14' }}>
+      <div className="lc-footer-inner" style={{ maxWidth: '1200px', margin: '0 auto' }}>
+        <div className="lc-footer-grid">
           {/* Brand */}
-          <div>
+          <div className="lc-footer-brand">
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '14px' }}>
               <div style={{ width: '30px', height: '30px', background: 'linear-gradient(135deg, #4a7fff, #2563eb)', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none">

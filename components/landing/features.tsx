@@ -70,7 +70,7 @@ const features = [
 
 export default function Features() {
   return (
-    <section id="features" style={{ padding: '120px 32px', position: 'relative' }}>
+    <section id="features" className="lc-features-section" style={{ position: 'relative' }}>
       {/* Divider line */}
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
         <div style={{ height: '1px', background: 'linear-gradient(90deg, transparent, rgba(74,127,255,0.2), transparent)', marginBottom: '80px' }} />
@@ -87,7 +87,7 @@ export default function Features() {
           </p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px' }}>
+        <div className="lc-features-grid">
           {features.map(f => (
             <div
               key={f.title}

@@ -39,9 +39,9 @@ function CompanyLogo({ name, logoUrl, size = 48 }: { name: string; logoUrl: stri
 export default function PortfolioPage({ portfolio, points }: { portfolio: Startup[]; points: number }) {
   return (
     <div style={{ minHeight: '100vh', background: '#070d1a', fontFamily: 'var(--font-jakarta)', color: '#e8edf5' }}>
-      <div style={{ maxWidth: '960px', margin: '0 auto', padding: '48px 24px' }}>
+      <div className="lc-dash-wrap">
 
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '32px', flexWrap: 'wrap', gap: '16px' }}>
+        <div className="lc-dash-topbar" style={{ marginBottom: '32px' }}>
           <div>
             <h1 style={{ fontFamily: 'var(--font-syne)', fontSize: '30px', fontWeight: 800, color: '#e8edf5', letterSpacing: '-0.03em', lineHeight: 1.1 }}>
               My Portfolio
@@ -82,7 +82,7 @@ export default function PortfolioPage({ portfolio, points }: { portfolio: Startu
             </Link>
           </div>
         ) : (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '12px' }}>
+          <div className="lc-portfolio-grid">
             {portfolio.map(s => (
               <div key={s.id} style={{
                 background: '#0d1829', borderRadius: '16px',

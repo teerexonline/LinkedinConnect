@@ -49,3 +49,118 @@ a {
   from { transform: rotate(0deg) }
   to { transform: rotate(360deg) }
 }
+
+/* ===================== RESPONSIVE ===================== */
+
+/* Header */
+.lc-header-inner { padding: 0 32px; }
+.lc-hamburger { display: none; background: none; border: none; cursor: pointer; color: #e8edf5; padding: 4px; align-items: center; justify-content: center; }
+.lc-mobile-nav { display: none; }
+
+/* Hero */
+.lc-hero-section { padding: 48px 32px 64px; }
+.lc-hero-inner { display: flex; align-items: center; gap: 64px; width: 100%; max-width: 1200px; margin: 0 auto; }
+.lc-hero-viz { flex: 0 0 auto; display: flex; justify-content: center; }
+.lc-hero-stats { display: flex; gap: 40px; }
+
+/* Features */
+.lc-features-section { padding: 64px 32px; }
+.lc-features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+/* Pricing */
+.lc-pricing-section { padding: 64px 32px; }
+.lc-pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: start; }
+
+/* Footer */
+.lc-footer-inner { padding: 48px 32px 32px; }
+.lc-footer-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 56px; }
+
+/* Dashboard / Portfolio */
+.lc-dash-wrap { max-width: 960px; margin: 0 auto; padding: 48px 24px; position: relative; z-index: 1; }
+.lc-dash-topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 48px; flex-wrap: wrap; gap: 16px; }
+.lc-dash-nav-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 48px; }
+.lc-portfolio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+
+/* Follows list */
+.lc-follows-wrap { max-width: 800px; margin: 0 auto; padding: 48px 24px; }
+.lc-follows-row { display: flex; align-items: center; gap: 16px; }
+
+@media (max-width: 768px) {
+  /* Header */
+  .lc-header-inner { padding: 0 16px !important; }
+  .lc-nav-desktop { display: none !important; }
+  .lc-hamburger { display: flex !important; }
+  .lc-nav-auth-text { display: none !important; }
+  .lc-mobile-nav {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 72px; left: 0; right: 0;
+    background: rgba(7,13,26,0.98);
+    backdrop-filter: blur(20px);
+    padding: 20px 16px 32px;
+    z-index: 98;
+    gap: 4px;
+    border-top: 1px solid rgba(74,127,255,0.1);
+    border-bottom: 1px solid rgba(74,127,255,0.08);
+  }
+  .lc-mobile-nav a, .lc-mobile-nav button {
+    display: block;
+    padding: 13px 16px;
+    border-radius: 10px;
+    font-family: var(--font-jakarta);
+    font-size: 15px;
+    font-weight: 500;
+    color: #e8edf5;
+    text-decoration: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.15s;
+    width: 100%;
+  }
+  .lc-mobile-nav a:hover, .lc-mobile-nav button:hover {
+    background: rgba(74,127,255,0.08);
+  }
+  .lc-mobile-nav .lc-mobile-divider {
+    height: 1px;
+    background: rgba(74,127,255,0.08);
+    margin: 8px 0;
+  }
+
+  /* Hero */
+  .lc-hero-section { padding: 32px 16px 48px !important; }
+  .lc-hero-inner { flex-direction: column !important; gap: 40px !important; }
+  .lc-hero-viz { display: none !important; }
+  .lc-hero-stats { gap: 20px !important; flex-wrap: wrap !important; }
+
+  /* Features */
+  .lc-features-section { padding: 48px 16px !important; }
+  .lc-features-grid { grid-template-columns: 1fr !important; }
+
+  /* Pricing */
+  .lc-pricing-section { padding: 48px 16px !important; }
+  .lc-pricing-grid { grid-template-columns: 1fr !important; }
+  .lc-pricing-popular { transform: scale(1) !important; }
+
+  /* Footer */
+  .lc-footer-inner { padding: 40px 16px 24px !important; }
+  .lc-footer-grid { grid-template-columns: 1fr 1fr !important; gap: 28px !important; }
+  .lc-footer-brand { grid-column: 1 / -1 !important; }
+
+  /* Dashboard / Portfolio */
+  .lc-dash-wrap { padding: 24px 16px !important; }
+  .lc-dash-topbar { flex-direction: column !important; align-items: flex-start !important; gap: 12px !important; }
+  .lc-dash-nav-cards { grid-template-columns: 1fr !important; }
+  .lc-portfolio-grid { grid-template-columns: 1fr !important; }
+
+  /* Follows */
+  .lc-follows-wrap { padding: 24px 16px !important; }
+  .lc-follows-row { flex-wrap: wrap !important; gap: 10px !important; }
+}
+
+@media (max-width: 480px) {
+  .lc-footer-grid { grid-template-columns: 1fr !important; }
+  .lc-dash-nav-cards { grid-template-columns: repeat(3, 1fr) !important; }
+}

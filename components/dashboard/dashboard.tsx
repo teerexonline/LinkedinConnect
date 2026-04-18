@@ -55,10 +55,10 @@ export default function Dashboard({ portfolio, follows, points, userEmail }: Pro
       <div style={{ position: 'fixed', inset: 0, backgroundImage: 'radial-gradient(circle at 20% 20%, rgba(74,127,255,0.05) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(10,102,194,0.04) 0%, transparent 50%)', pointerEvents: 'none' }} />
       <div style={{ position: 'fixed', inset: 0, backgroundImage: 'radial-gradient(rgba(74,127,255,0.05) 1px, transparent 1px)', backgroundSize: '32px 32px', pointerEvents: 'none', opacity: 0.4 }} />
 
-      <div style={{ maxWidth: '960px', margin: '0 auto', padding: '48px 24px', position: 'relative', zIndex: 1 }}>
+      <div className="lc-dash-wrap" style={{ position: 'relative', zIndex: 1 }}>
 
         {/* Top bar */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '48px', flexWrap: 'wrap', gap: '16px' }}>
+        <div className="lc-dash-topbar">
           <div>
             <Link href="/" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', textDecoration: 'none', marginBottom: '12px' }}>
               <div style={{ width: '28px', height: '28px', background: 'linear-gradient(135deg, #4a7fff, #2563eb)', borderRadius: '7px', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 0 16px rgba(74,127,255,0.35)' }}>
@@ -92,7 +92,7 @@ export default function Dashboard({ portfolio, follows, points, userEmail }: Pro
         </div>
 
         {/* Nav cards */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '12px', marginBottom: '48px' }}>
+        <div className="lc-dash-nav-cards" style={{ marginBottom: '48px' }}>
           {[
             { label: 'My Portfolio', count: portfolio.length, href: '#portfolio', icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4a7fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>, color: '#4a7fff' },
             { label: 'My Follows', count: follows.length, href: '#follows', icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="#f5b731"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>, color: '#f5b731' },

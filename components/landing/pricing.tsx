@@ -37,7 +37,7 @@ const tiers = [
 
 export default function Pricing() {
   return (
-    <section id="pricing" style={{ padding: '120px 32px', position: 'relative' }}>
+    <section id="pricing" className="lc-pricing-section" style={{ position: 'relative' }}>
       <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: '900px', height: '600px', background: 'radial-gradient(ellipse, rgba(74,127,255,0.04) 0%, transparent 70%)', pointerEvents: 'none' }} />
 
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
@@ -53,10 +53,11 @@ export default function Pricing() {
           </p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px', alignItems: 'start' }}>
+        <div className="lc-pricing-grid">
           {tiers.map(tier => (
             <div
               key={tier.name}
+              className={tier.highlight ? 'lc-pricing-popular' : ''}
               style={{
                 padding: '36px',
                 borderRadius: '20px',
@@ -64,7 +65,7 @@ export default function Pricing() {
                 border: tier.highlight ? '1px solid rgba(74,127,255,0.35)' : '1px solid rgba(74,127,255,0.07)',
                 position: 'relative',
                 boxShadow: tier.highlight ? '0 0 80px rgba(74,127,255,0.1), inset 0 1px 0 rgba(74,127,255,0.1)' : 'none',
-                transform: tier.highlight ? 'scale(1.025)' : 'scale(1)',
+                transform: tier.highlight ? 'scale(1.025)' : 'scale(1)'
               }}
             >
               {tier.highlight && (
