@@ -79,7 +79,7 @@ export default function Hero() {
 
         {/* Right: Network viz */}
         <div className="lc-hero-viz">
-          <div style={{ position: 'relative', width: '480px', height: '480px' }}>
+          <div style={{ position: 'relative', width: '360px', height: '360px' }}>
             {/* Outer ring */}
             <div style={{ position: 'absolute', inset: 0, borderRadius: '50%', border: '1px solid rgba(74,127,255,0.08)', background: 'radial-gradient(circle, rgba(74,127,255,0.04) 0%, transparent 70%)' }} />
 
@@ -92,7 +92,7 @@ export default function Hero() {
             ))}
 
             {/* SVG */}
-            <svg width="480" height="480" viewBox="0 0 480 480" style={{ position: 'absolute', inset: 0 }}>
+            <svg width="360" height="360" viewBox="0 0 480 480" style={{ position: 'absolute', inset: 0 }}>
               <defs>
                 <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%">
                   <stop offset="0%" stopColor="#4a7fff" stopOpacity="0.3" />
