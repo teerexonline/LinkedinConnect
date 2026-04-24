@@ -10,7 +10,7 @@ export default async function Portfolio() {
   const [portfolioRes, pointsRes] = await Promise.all([
     supabase
       .from('startups')
-      .select('id, name, description, logo_url, industry, company_size, headquarters, follower_count, linkedin_url, website')
+      .select('id, name, description, logo_url, industry, company_size, headquarters, follower_count, linkedin_url, website, featured_post_url')
       .eq('created_by', user.id)
       .order('created_at', { ascending: false }),
     supabase

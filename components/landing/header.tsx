@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import type { User } from '@supabase/supabase-js'
 
@@ -10,6 +11,7 @@ export default function Header() {
   const [points, setPoints] = useState<number | null>(null)
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const router = useRouter()
 
   useEffect(() => {
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ?? ''
@@ -41,6 +43,14 @@ export default function Header() {
 
   const closeMenu = () => setMenuOpen(false)
 
+  const handleLogout = async () => {
+    closeMenu()
+    const supabase = createClient()
+    await supabase.auth.signOut()
+    router.push('/')
+    router.refresh()
+  }
+
   return (
     <>
       <header style={{
@@ -71,13 +81,6 @@ export default function Header() {
 
             {/* Desktop Nav */}
             <nav className="lc-nav-desktop" style={{ display: 'flex', alignItems: 'center', gap: '32px', flex: 1 }}>
-              {!user && ['Features', 'Pricing', 'About'].map(item => (
-                <a key={item} href={`#${item.toLowerCase()}`}
-                  style={{ fontFamily: 'var(--font-jakarta)', fontSize: '14px', fontWeight: 500, color: '#6b7d99', textDecoration: 'none', transition: 'color 0.2s' }}
-                  onMouseEnter={e => (e.currentTarget.style.color = '#e8edf5')}
-                  onMouseLeave={e => (e.currentTarget.style.color = '#6b7d99')}
-                >{item}</a>
-              ))}
               {user && (
                 <>
                   <Link href="/follows" style={{ fontFamily: 'var(--font-jakarta)', fontSize: '14px', fontWeight: 500, color: '#6b7d99', textDecoration: 'none', transition: 'color 0.2s' }}
@@ -106,11 +109,11 @@ export default function Header() {
                       <span style={{ fontFamily: 'var(--font-jakarta)', fontSize: '13px', fontWeight: 700, color: '#f5b731' }}>{points}</span>
                     </div>
                   )}
-                  <Link href="/logout" className="lc-nav-auth-text"
-                    style={{ padding: '8px 18px', borderRadius: '8px', border: '1px solid rgba(74,127,255,0.25)', color: '#e8edf5', fontFamily: 'var(--font-jakarta)', fontSize: '14px', fontWeight: 500, textDecoration: 'none', transition: 'all 0.2s' }}
+                  <button onClick={handleLogout} className="lc-nav-auth-text"
+                    style={{ padding: '8px 18px', borderRadius: '8px', border: '1px solid rgba(74,127,255,0.25)', color: '#e8edf5', fontFamily: 'var(--font-jakarta)', fontSize: '14px', fontWeight: 500, background: 'transparent', cursor: 'pointer', transition: 'all 0.2s' }}
                     onMouseEnter={e => { e.currentTarget.style.background = 'rgba(74,127,255,0.08)'; e.currentTarget.style.borderColor = 'rgba(74,127,255,0.45)' }}
                     onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.borderColor = 'rgba(74,127,255,0.25)' }}
-                  >Logout</Link>
+                  >Logout</button>
                 </>
               ) : (
                 <>
@@ -119,11 +122,11 @@ export default function Header() {
                     onMouseEnter={e => { e.currentTarget.style.background = 'rgba(74,127,255,0.06)'; e.currentTarget.style.borderColor = 'rgba(74,127,255,0.4)' }}
                     onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.borderColor = 'rgba(74,127,255,0.2)' }}
                   >Login</Link>
-                  <Link href="/signup"
+                  <Link href="/login"
                     style={{ padding: '8px 20px', borderRadius: '8px', background: 'linear-gradient(135deg, #4a7fff, #2563eb)', color: 'white', fontFamily: 'var(--font-jakarta)', fontSize: '14px', fontWeight: 600, textDecoration: 'none', boxShadow: '0 0 20px rgba(74,127,255,0.3)', transition: 'all 0.2s' }}
                     onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 0 32px rgba(74,127,255,0.5)'; e.currentTarget.style.transform = 'translateY(-1px)' }}
                     onMouseLeave={e => { e.currentTarget.style.boxShadow = '0 0 20px rgba(74,127,255,0.3)'; e.currentTarget.style.transform = 'translateY(0)' }}
-                  >Get Started</Link>
+                  >Add Your Company →</Link>
                 </>
               )}
 
@@ -145,22 +148,18 @@ export default function Header() {
         <nav className="lc-mobile-nav">
           {!user && (
             <>
-              <a href="#features" onClick={closeMenu}>Features</a>
-              <a href="#pricing" onClick={closeMenu}>Pricing</a>
-              <a href="#about" onClick={closeMenu}>About</a>
-              <div className="lc-mobile-divider" />
               <Link href="/login" onClick={closeMenu}>Login</Link>
-              <Link href="/signup" onClick={closeMenu} style={{ background: 'linear-gradient(135deg, #4a7fff, #2563eb)', color: 'white', fontWeight: 600 }}>Get Started</Link>
+              <Link href="/login" onClick={closeMenu} style={{ background: 'linear-gradient(135deg, #4a7fff, #2563eb)', color: 'white', fontWeight: 600 }}>Add Your Company →</Link>
             </>
           )}
           {user && (
             <>
-              <Link href="/dashboard" onClick={closeMenu}>My Portfolio</Link>
+              <Link href="/portfolio" onClick={closeMenu}>My Portfolio</Link>
               <Link href="/follows" onClick={closeMenu}>My Follows</Link>
               <Link href="/admin/add-startup" onClick={closeMenu}>Add Company</Link>
               <Link href="/discover" onClick={closeMenu} style={{ color: '#4a7fff' }}>Discover</Link>
               <div className="lc-mobile-divider" />
-              <Link href="/logout" onClick={closeMenu} style={{ color: '#6b7d99' }}>Logout</Link>
+              <button onClick={handleLogout} style={{ color: '#6b7d99', background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'var(--font-jakarta)', fontSize: '15px', fontWeight: 500, textAlign: 'left', padding: '12px 24px', width: '100%' }}>Logout</button>
             </>
           )}
         </nav>

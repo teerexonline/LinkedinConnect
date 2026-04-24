@@ -14,7 +14,6 @@ interface CompanyData {
   follower_count: number
   linkedin_url: string
   linkedin_company_id: string
-  featured_post_url: string
 }
 
 const inputStyle: React.CSSProperties = {
@@ -50,7 +49,7 @@ export default function AddStartupPage() {
     if (!res.ok) {
       setError(json.error ?? 'Failed to fetch company data')
     } else {
-      setData({ ...json, featured_post_url: '' })
+      setData(json)
     }
     setFetching(false)
   }
@@ -68,7 +67,7 @@ export default function AddStartupPage() {
     const json = await res.json()
 
     if (!res.ok) {
-      setError(json.error ?? 'Failed to save startup')
+      setError(json.error ?? 'Failed to save company')
     } else {
       setSuccess(true)
       setData(null)
@@ -108,9 +107,9 @@ export default function AddStartupPage() {
     <div style={{ minHeight: '100vh', background: '#070d1a', padding: '40px 24px', fontFamily: 'var(--font-jakarta)', color: '#e8edf5' }}>
       <div style={{ maxWidth: '600px', margin: '0 auto' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '40px' }}>
-          <Link href="/" style={{ color: '#6b7d99', textDecoration: 'none', fontSize: '14px' }}>← Home</Link>
+          <Link href="/portfolio" style={{ color: '#6b7d99', textDecoration: 'none', fontSize: '14px' }}>← Back</Link>
           <h1 style={{ fontFamily: 'var(--font-syne)', fontSize: '28px', fontWeight: 800, color: '#e8edf5', letterSpacing: '-0.02em' }}>
-            Add Startup
+            Add Company
           </h1>
         </div>
 
@@ -124,7 +123,7 @@ export default function AddStartupPage() {
               type="url"
               value={url}
               onChange={e => setUrl(e.target.value)}
-              placeholder="https://www.linkedin.com/company/researchorg"
+              placeholder="https://www.linkedin.com/company/yourcompany"
               style={{ ...inputStyle, flex: 1 }}
               onKeyDown={e => e.key === 'Enter' && fetchCompany()}
               onFocus={e => { e.currentTarget.style.borderColor = 'rgba(74,127,255,0.5)' }}
@@ -154,22 +153,21 @@ export default function AddStartupPage() {
         )}
 
         {success && (
-          <div style={{ padding: '12px 16px', borderRadius: '10px', background: 'rgba(52,211,153,0.08)', border: '1px solid rgba(52,211,153,0.2)', color: '#34d399', fontSize: '14px', marginBottom: '20px' }}>
-            ✓ Startup added successfully! It will now appear in the Discover feed.
+          <div style={{ padding: '16px', borderRadius: '10px', background: 'rgba(52,211,153,0.08)', border: '1px solid rgba(52,211,153,0.2)', color: '#34d399', fontSize: '14px', marginBottom: '20px' }}>
+            <div style={{ fontWeight: 700, marginBottom: '4px' }}>✓ Company added!</div>
+            <div style={{ fontSize: '13px', color: '#6b7d99' }}>Now add a featured post so others can discover and like it. Go to <Link href="/portfolio" style={{ color: '#4a7fff', textDecoration: 'none' }}>My Portfolio</Link> and click &ldquo;Add Post&rdquo;.</div>
           </div>
         )}
 
-        {/* Editable fields */}
         {data && (
           <div style={{ background: '#0d1829', borderRadius: '16px', border: '1px solid rgba(74,127,255,0.1)', padding: '28px' }}>
             <p style={{ fontSize: '13px', color: '#6b7d99', marginBottom: '24px' }}>
               Review and edit the fetched data before saving.
             </p>
 
-            {/* Logo preview */}
             {data.logo_url && (
               <div style={{ marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <img src={data.logo_url} alt="Logo preview" style={{ width: '56px', height: '56px', borderRadius: '12px', objectFit: 'cover', border: '1px solid rgba(74,127,255,0.2)' }} />
+                <img src={data.logo_url} alt="Logo" style={{ width: '56px', height: '56px', borderRadius: '12px', objectFit: 'cover', border: '1px solid rgba(74,127,255,0.2)' }} />
                 <span style={{ fontSize: '13px', color: '#6b7d99' }}>Logo preview</span>
               </div>
             )}
@@ -181,13 +179,6 @@ export default function AddStartupPage() {
             {field('Company Size', 'company_size')}
             {field('Headquarters', 'headquarters')}
             {field('Website', 'website')}
-
-            <div style={{ padding: '14px 16px', borderRadius: '10px', background: 'rgba(74,127,255,0.06)', border: '1px solid rgba(74,127,255,0.15)', marginBottom: '16px' }}>
-              <p style={{ fontSize: '12px', color: '#6b7d99', marginBottom: '10px', lineHeight: 1.6 }}>
-                <strong style={{ color: '#4a7fff' }}>Featured Post URL</strong> — paste a URL to one of this company&apos;s LinkedIn posts. Users must <strong>like</strong> this post to earn their point. Go to the company page → click any post → copy the URL.
-              </p>
-              {field('Featured Post URL (for like verification)', 'featured_post_url')}
-            </div>
 
             <button
               onClick={saveStartup}
@@ -203,7 +194,7 @@ export default function AddStartupPage() {
                 transition: 'opacity 0.2s',
               }}
             >
-              {saving ? 'Saving…' : 'Add to Discover Feed'}
+              {saving ? 'Saving…' : 'Add Company'}
             </button>
           </div>
         )}
