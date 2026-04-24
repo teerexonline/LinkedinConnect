@@ -33,8 +33,9 @@ export async function updateSession(request: NextRequest) {
     }
   )
 
-  // IMPORTANT: Do not run code between createServerClient and supabase.auth.getUser()
-  const { data: { user } } = await supabase.auth.getUser()
+  // IMPORTANT: Do not run code between createServerClient and supabase.auth.getClaims()
+  const { data } = await supabase.auth.getClaims()
+  const claims = data?.claims ?? null
 
   const { pathname } = request.nextUrl
 
@@ -49,22 +50,10 @@ export async function updateSession(request: NextRequest) {
     pathname.startsWith('/onboarding') ||
     pathname.startsWith('/api/linkedin/company')
 
-  if (!user && !isPublic) {
+  if (!claims && !isPublic) {
     const url = request.nextUrl.clone()
     url.pathname = '/login'
     return NextResponse.redirect(url)
-  }
-
-  // Redirect authenticated users away from the landing page
-  if (user && pathname === '/') {
-    const url = request.nextUrl.clone()
-    url.pathname = '/dashboard'
-    const redirectResponse = NextResponse.redirect(url)
-    // Carry any refreshed auth cookies forward so the session isn't dropped
-    supabaseResponse.cookies.getAll().forEach(cookie => {
-      redirectResponse.cookies.set(cookie.name, cookie.value, cookie as Parameters<typeof redirectResponse.cookies.set>[2])
-    })
-    return redirectResponse
   }
 
   return supabaseResponse
