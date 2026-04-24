@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 
 interface CompanyData {
@@ -37,6 +37,31 @@ export default function AddStartupPage() {
   const [data, setData] = useState<CompanyData | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState(false)
+
+  useEffect(() => {
+    const pending = sessionStorage.getItem('lc_pending_company')
+    if (pending) {
+      try {
+        const parsed = JSON.parse(pending) as Partial<CompanyData>
+        setData({
+          name: parsed.name ?? '',
+          description: parsed.description ?? '',
+          logo_url: parsed.logo_url ?? '',
+          industry: parsed.industry ?? '',
+          company_size: parsed.company_size ?? '',
+          headquarters: parsed.headquarters ?? '',
+          website: parsed.website ?? '',
+          follower_count: parsed.follower_count ?? 0,
+          linkedin_url: parsed.linkedin_url ?? '',
+          linkedin_company_id: parsed.linkedin_company_id ?? '',
+        })
+        if (parsed.linkedin_url) setUrl(parsed.linkedin_url)
+        sessionStorage.removeItem('lc_pending_company')
+      } catch {
+        sessionStorage.removeItem('lc_pending_company')
+      }
+    }
+  }, [])
 
   const fetchCompany = async () => {
     setFetching(true)

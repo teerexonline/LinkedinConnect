@@ -44,6 +44,7 @@ export default function Onboarding() {
   const [stage, setStage] = useState('')
   const [goals, setGoals] = useState<string[]>([])
   const [authLoading, setAuthLoading] = useState(false)
+  const [authError, setAuthError] = useState<string | null>(null)
 
   const toggleGoal = (id: string) =>
     setGoals(g => g.includes(id) ? g.filter(x => x !== id) : [...g, id])
@@ -64,16 +65,24 @@ export default function Onboarding() {
 
   const handleSignUp = async () => {
     setAuthLoading(true)
-    // Store company data so add-startup can pre-fill after login
+    setAuthError(null)
     if (company) sessionStorage.setItem('lc_pending_company', JSON.stringify(company))
     const supabase = createClient()
-    await supabase.auth.signInWithOAuth({
+    const { data, error } = await supabase.auth.signInWithOAuth({
       provider: 'linkedin_oidc',
       options: {
         redirectTo: `${window.location.origin}/auth/callback?next=/admin/add-startup`,
         scopes: 'openid profile email w_member_social',
       },
     })
+    if (error) {
+      setAuthError(error.message)
+      setAuthLoading(false)
+      return
+    }
+    if (data?.url) {
+      window.location.href = data.url
+    }
   }
 
   const TOTAL = 3
@@ -270,6 +279,12 @@ export default function Onboarding() {
             <p style={{ fontSize: '14px', color: '#6b7d99', lineHeight: 1.7, marginBottom: '32px' }}>
               Sign in with LinkedIn to add <strong style={{ color: '#e8edf5' }}>{company?.name ?? 'your company'}</strong> and start growing your page.
             </p>
+
+            {authError && (
+              <div style={{ padding: '12px 16px', borderRadius: '10px', background: 'rgba(251,113,133,0.08)', border: '1px solid rgba(251,113,133,0.2)', color: '#fb7185', fontSize: '13px', marginBottom: '16px', textAlign: 'left' }}>
+                {authError}
+              </div>
+            )}
 
             <button onClick={handleSignUp} disabled={authLoading}
               style={{
