@@ -47,7 +47,8 @@ export async function updateSession(request: NextRequest) {
     pathname.startsWith('/forgot-password') ||
     pathname.startsWith('/reset-password') ||
     pathname.startsWith('/logout') ||
-    pathname.startsWith('/onboarding')
+    pathname.startsWith('/onboarding') ||
+    pathname.startsWith('/api/linkedin/company')
 
   if (!claims && !isPublic) {
     const url = request.nextUrl.clone()
