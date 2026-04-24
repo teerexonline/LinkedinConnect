@@ -46,7 +46,8 @@ export async function updateSession(request: NextRequest) {
     pathname.startsWith('/auth') ||
     pathname.startsWith('/forgot-password') ||
     pathname.startsWith('/reset-password') ||
-    pathname.startsWith('/logout')
+    pathname.startsWith('/logout') ||
+    pathname.startsWith('/onboarding')
 
   if (!claims && !isPublic) {
     const url = request.nextUrl.clone()
