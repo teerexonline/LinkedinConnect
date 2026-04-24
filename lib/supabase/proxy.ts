@@ -33,9 +33,8 @@ export async function updateSession(request: NextRequest) {
     }
   )
 
-  // IMPORTANT: Do not run code between createServerClient and supabase.auth.getClaims()
-  const { data } = await supabase.auth.getClaims()
-  const claims = data?.claims ?? null
+  // IMPORTANT: Do not run code between createServerClient and supabase.auth.getUser()
+  const { data: { user } } = await supabase.auth.getUser()
 
   const { pathname } = request.nextUrl
 
@@ -50,7 +49,7 @@ export async function updateSession(request: NextRequest) {
     pathname.startsWith('/onboarding') ||
     pathname.startsWith('/api/linkedin/company')
 
-  if (!claims && !isPublic) {
+  if (!user && !isPublic) {
     const url = request.nextUrl.clone()
     url.pathname = '/login'
     return NextResponse.redirect(url)
