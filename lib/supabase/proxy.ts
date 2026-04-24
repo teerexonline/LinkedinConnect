@@ -59,7 +59,12 @@ export async function updateSession(request: NextRequest) {
   if (user && pathname === '/') {
     const url = request.nextUrl.clone()
     url.pathname = '/dashboard'
-    return NextResponse.redirect(url)
+    const redirectResponse = NextResponse.redirect(url)
+    // Carry any refreshed auth cookies forward so the session isn't dropped
+    supabaseResponse.cookies.getAll().forEach(cookie => {
+      redirectResponse.cookies.set(cookie.name, cookie.value, cookie as Parameters<typeof redirectResponse.cookies.set>[2])
+    })
+    return redirectResponse
   }
 
   return supabaseResponse
