@@ -20,7 +20,7 @@ export async function GET(request: Request) {
         const meta = session.user.user_metadata ?? {}
         const linkedinId = meta.sub ?? meta.provider_id ?? meta.id ?? null
 
-        await supabase.from('user_profiles').upsert({
+        const { error: upsertError } = await supabase.from('user_profiles').upsert({
           user_id: session.user.id,
           linkedin_access_token: providerToken,
           linkedin_id: linkedinId ? String(linkedinId) : null,
@@ -28,11 +28,15 @@ export async function GET(request: Request) {
           avatar_url: meta.avatar_url ?? meta.picture ?? null,
           updated_at: new Date().toISOString(),
         }, { onConflict: 'user_id' })
+
+        if (upsertError) {
+          console.error('[auth/callback] user_profiles upsert failed:', upsertError.message)
+        }
       }
 
       return NextResponse.redirect(`${origin}${next}`)
     }
   }
 
-  return NextResponse.redirect(`${origin}/?error=auth`)
+  return NextResponse.redirect(`${origin}/login?error=auth`)
 }

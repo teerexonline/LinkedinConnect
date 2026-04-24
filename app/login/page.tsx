@@ -1,21 +1,25 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { Suspense, useState, useEffect } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 
-export default function LoginPage() {
+function LoginForm() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const router = useRouter()
+  const searchParams = useSearchParams()
 
   useEffect(() => {
+    if (searchParams.get('error')) {
+      setError('Authentication failed. Please try again.')
+    }
     const supabase = createClient()
     supabase.auth.getUser().then(({ data: { user } }) => {
       if (user) router.replace('/dashboard')
     })
-  }, [router])
+  }, [router, searchParams])
 
   const handleLinkedIn = async () => {
     setLoading(true)
@@ -46,7 +50,6 @@ export default function LoginPage() {
       position: 'relative',
       overflow: 'hidden',
     }}>
-      {/* Ambient glow */}
       <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle at 50% 40%, rgba(10,102,194,0.08) 0%, transparent 60%)', pointerEvents: 'none' }} />
       <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(rgba(74,127,255,0.05) 1px, transparent 1px)', backgroundSize: '32px 32px', pointerEvents: 'none' }} />
 
@@ -61,7 +64,6 @@ export default function LoginPage() {
         position: 'relative',
         zIndex: 1,
       }}>
-        {/* Logo */}
         <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none', marginBottom: '40px' }}>
           <div style={{
             width: '34px', height: '34px',
@@ -143,5 +145,13 @@ export default function LoginPage() {
 
       <style>{`@keyframes spin { from { transform: rotate(0deg) } to { transform: rotate(360deg) } }`}</style>
     </div>
+  )
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense>
+      <LoginForm />
+    </Suspense>
   )
 }
