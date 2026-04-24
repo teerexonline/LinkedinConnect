@@ -122,7 +122,7 @@ export default function Header() {
                     onMouseEnter={e => { e.currentTarget.style.background = 'rgba(74,127,255,0.06)'; e.currentTarget.style.borderColor = 'rgba(74,127,255,0.4)' }}
                     onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.borderColor = 'rgba(74,127,255,0.2)' }}
                   >Login</Link>
-                  <Link href="/login"
+                  <Link href="/onboarding"
                     style={{ padding: '8px 20px', borderRadius: '8px', background: 'linear-gradient(135deg, #4a7fff, #2563eb)', color: 'white', fontFamily: 'var(--font-jakarta)', fontSize: '14px', fontWeight: 600, textDecoration: 'none', boxShadow: '0 0 20px rgba(74,127,255,0.3)', transition: 'all 0.2s' }}
                     onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 0 32px rgba(74,127,255,0.5)'; e.currentTarget.style.transform = 'translateY(-1px)' }}
                     onMouseLeave={e => { e.currentTarget.style.boxShadow = '0 0 20px rgba(74,127,255,0.3)'; e.currentTarget.style.transform = 'translateY(0)' }}
@@ -149,7 +149,7 @@ export default function Header() {
           {!user && (
             <>
               <Link href="/login" onClick={closeMenu}>Login</Link>
-              <Link href="/login" onClick={closeMenu} style={{ background: 'linear-gradient(135deg, #4a7fff, #2563eb)', color: 'white', fontWeight: 600 }}>Add Your Company →</Link>
+              <Link href="/onboarding" onClick={closeMenu} style={{ background: 'linear-gradient(135deg, #4a7fff, #2563eb)', color: 'white', fontWeight: 600 }}>Add Your Company →</Link>
             </>
           )}
           {user && (

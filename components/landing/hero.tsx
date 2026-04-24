@@ -53,11 +53,11 @@ export default function Hero() {
           </p>
 
           <div style={{ display: 'flex', gap: '14px', marginBottom: '56px', flexWrap: 'wrap' }}>
-            <Link href="/signup" style={{ padding: '14px 28px', borderRadius: '10px', background: 'linear-gradient(135deg, #4a7fff, #2563eb)', color: 'white', fontFamily: 'var(--font-jakarta)', fontSize: '16px', fontWeight: 600, textDecoration: 'none', boxShadow: '0 0 40px rgba(74,127,255,0.4)', transition: 'all 0.2s', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+            <Link href="/onboarding" style={{ padding: '14px 28px', borderRadius: '10px', background: 'linear-gradient(135deg, #4a7fff, #2563eb)', color: 'white', fontFamily: 'var(--font-jakarta)', fontSize: '16px', fontWeight: 600, textDecoration: 'none', boxShadow: '0 0 40px rgba(74,127,255,0.4)', transition: 'all 0.2s', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
               onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 0 56px rgba(74,127,255,0.55)'; e.currentTarget.style.transform = 'translateY(-2px)' }}
               onMouseLeave={e => { e.currentTarget.style.boxShadow = '0 0 40px rgba(74,127,255,0.4)'; e.currentTarget.style.transform = 'translateY(0)' }}
             >
-              Start Growing Free →
+              Add Your Company →
             </Link>
             <a href="#features" style={{ padding: '14px 28px', borderRadius: '10px', border: '1px solid rgba(74,127,255,0.2)', background: 'rgba(74,127,255,0.04)', color: '#e8edf5', fontFamily: 'var(--font-jakarta)', fontSize: '16px', fontWeight: 500, textDecoration: 'none', transition: 'all 0.2s' }}
               onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(74,127,255,0.4)'; e.currentTarget.style.background = 'rgba(74,127,255,0.08)' }}
